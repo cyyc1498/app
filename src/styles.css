@@ -11,7 +11,6 @@ body{
     text-align: right;
     display: block;
     
-    
 }
 
 
@@ -128,10 +127,22 @@ text-transform: capitalize;
     padding-bottom: 30px;
     
     
-}
-
-#conversion:hover{
+}#conversion:hover{
     color:#81b4a8;
     transition: 200ms ease-in;
     cursor:pointer;
 }
+
+#gitRepo{
+    color: #ececec;
+    text-decoration: none;
+    float:right;
+}
+
+#gitRepo:hover {
+    color: #81b4a8;
+    transition: 200ms ease-in;
+    cursor: pointer;
+}
+
+
