@@ -1,0 +1,137 @@
+
+body{
+    background-color:#142d4c;
+    color:#ececec;
+    font-family: "Oswald";
+}
+
+
+#search-form{
+    margin: 20px auto 30px;
+    text-align: right;
+    display: block;
+    
+    
+}
+
+
+input{
+    text-align: center;
+    background-color: rgb(241, 240, 238);
+    border: solid white 1px;
+    line-height: 30px;
+}
+
+button{
+    border:none;
+    padding: 5px 10px;
+    background-color: transparent;
+    color:#ececec;
+}
+
+#current-location{
+    font-size: larger;
+    display: inline;
+    float:right;
+
+}
+
+#city{
+margin-top: 10px;
+font-size: 50px;
+text-transform: capitalize;
+}
+
+#city, #currentTemp{
+    text-align: center;
+}
+
+#currentTemp{
+    position: relative;
+    top:20px;
+    font-size: 40px;
+    padding:none;
+}
+
+#time{
+    display:inline;
+    float:left;
+    font-size: 40px;
+    
+}
+
+
+
+
+.row_height{
+    height:fit-content;
+}
+
+
+
+.currentIcon{
+    font-size:1000%;
+    position:relative;
+    left:40%;
+    top:15px;
+    width: 250px;
+
+}
+
+.rainWind{
+    position:relative;
+    top:20%;
+    list-style: none;
+    font-weight: bold;
+    font-size: larger;
+   
+}
+
+#description{
+    text-transform: capitalize;
+}
+
+.days{
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.current{
+    margin-bottom: 20px;
+    line-height: 50px;
+    background-image: url("https://images.pexels.com/photos/1529360/pexels-photo-1529360.jpeg");
+    background-size: 100%;
+    text-shadow: #142d4c 2px 2px 5px;
+}
+
+.card{
+    border: solid #385170;
+    background-color: #81b4a8;
+}
+
+.reload{
+    display:block;
+    position: static;
+    float:right;
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+}
+
+.icons{
+    font-size: 400%;
+}
+
+#conversion{
+    color:#ececec;
+    text-decoration: none;
+    padding-bottom: 30px;
+    
+    
+}
+
+#conversion:hover{
+    color:#81b4a8;
+    transition: 200ms ease-in;
+    cursor:pointer;
+}
