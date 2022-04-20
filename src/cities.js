@@ -53,6 +53,31 @@ function timeDisplay(){
 now.innerHTML = timeDisplay();
 
 
+let apiKey = `273346a7322f8fd8336a2edf5af47985`;
+let apiUrl =  `https://api.openweathermap.org/data/2.5/weather?q=Toronto&appid=${apiKey}&units=metric`;
+
+  function changeDefaultTemp(response){
+    console.log(response.data)
+    let changeDTemp = Math.round(response.data.main.temp);
+    let defaultTempEl = document.querySelector("#temp");
+    defaultTempEl.innerHTML = changeDTemp;
+
+    let changeDefaultDesc = response.data.weather[0].description;
+    let defaultDesc = document.querySelector("#description");
+    defaultDesc.innerHTML = changeDefaultDesc;
+
+    let changeDWind = Math.round(response.data.wind.speed);
+    let defaultWind = document.querySelector("#wind");
+    defaultWind.innerHTML = changeDWind;
+
+    let changeDFL = Math.round(response.data.main.feels_like);
+    let defaultFL = document.querySelector("#feelsLike");
+    defaultFL.innerHTML = changeDFL;
+
+  }
+  axios.get(apiUrl).then(changeDefaultTemp)
+
+
 //🕵️‍♀️Feature #2
 //Add a search engine, when searching for a city (i.e. Paris), display the city name on the page after the user submits the form.
 
@@ -82,9 +107,9 @@ function getCityTemp(response){
   let changeDescription = document.querySelector("#description")
   changeDescription.innerHTML = getDescription
 
-  let feelsLike = Math.round(response.data.main.feels_like);
+  let getfeelsLike = Math.round(response.data.main.feels_like);
   let changeFeels = document.querySelector("#feelsLike");
-  changeFeels.innerHTML = feelsLike;
+  changeFeels.innerHTML = getfeelsLike;
 
 }
 
