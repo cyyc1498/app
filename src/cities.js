@@ -74,6 +74,14 @@ let apiUrl =  `https://api.openweathermap.org/data/2.5/weather?q=Toronto&appid=$
     let defaultFL = document.querySelector("#feelsLike");
     defaultFL.innerHTML = changeDFL;
 
+    
+    let defaultIcon = document.querySelector("#icon")
+    defaultIcon.setAttribute("src",`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
+     
+    
+
+
+
   }
   axios.get(apiUrl).then(changeDefaultTemp)
 
@@ -110,6 +118,9 @@ function getCityTemp(response){
   let getfeelsLike = Math.round(response.data.main.feels_like);
   let changeFeels = document.querySelector("#feelsLike");
   changeFeels.innerHTML = getfeelsLike;
+
+  let getIcon = document.querySelector("#icon")
+  getIcon.setAttribute("src",`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
 
 }
 
@@ -201,6 +212,8 @@ function geoTemp(response){
   let feelsLike = document.querySelector("#feelsLike");
   feelsLike.innerHTML = setFeelsLike;
 
+  let setIcon = document.querySelector("#icon")
+  setIcon.setAttribute("src",`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
 }
 
 let currentLoc = document.querySelector("#current-location");

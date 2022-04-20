@@ -59,6 +59,13 @@ text-transform: capitalize;
     
 }
 
+#icon{
+    position: relative;
+    left: 40%;
+    bottom:5%;
+    width: 50%;
+    image-rendering:optimizeQuality;
+}
 
 
 
@@ -67,15 +74,6 @@ text-transform: capitalize;
 }
 
 
-
-.currentIcon{
-    font-size:1000%;
-    position:relative;
-    left:40%;
-    top:15px;
-    width: 250px;
-
-}
 
 .rainWind{
     position:relative;
@@ -101,6 +99,7 @@ text-transform: capitalize;
     background-image: url("https://images.pexels.com/photos/1529360/pexels-photo-1529360.jpeg");
     background-size: 100%;
     text-shadow: #142d4c 2px 2px 5px;
+    background-color: #81b4a8;
 }
 
 .card{
@@ -108,14 +107,14 @@ text-transform: capitalize;
     background-color: #81b4a8;
 }
 
-.reload{
+/*.reload{
     display:block;
     position: static;
     float:right;
     margin-right: 10px;
     margin-bottom: 10px;
 
-}
+}*/
 
 .icons{
     font-size: 400%;
