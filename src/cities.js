@@ -77,17 +77,10 @@ let apiUrl =  `https://api.openweathermap.org/data/2.5/weather?q=Toronto&appid=$
     
     let defaultIcon = document.querySelector("#icon")
     defaultIcon.setAttribute("src",`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
-     
-    
-
-
 
   }
   axios.get(apiUrl).then(changeDefaultTemp)
 
-
-//🕵️‍♀️Feature #2
-//Add a search engine, when searching for a city (i.e. Paris), display the city name on the page after the user submits the form.
 
 
 function citySearch(event){
@@ -130,10 +123,6 @@ axios.get(apiUrl).then(getCityTemp)
 let cityForm = document.querySelector("#search-form")
 cityForm.addEventListener("submit",citySearch)
 
-/*🙀Bonus Feature
-Display a fake temperature (i.e 17) in Celsius and add a link to convert it to Fahrenheit. 
-When clicking on it, it should convert the temperature to Fahrenheit. 
-When clicking on Celsius, it should convert it back to Celsius.
 
 let isCel = true;
 
@@ -142,14 +131,19 @@ function toFahrenheit(event){
   if(isCel === true){
     let toF = parseInt(document.querySelector("#temp").innerHTML)+32
     let tempF = document.querySelector("#temp").innerHTML = toF
-    let unitF = document.querySelector("#unit").innerHTML="°F"
+    let feelsToF = parseInt(document.querySelector("#feelsLike").innerHTML)+32
+    let feelsF = document.querySelector("#feelsLike").innerHTML = feelsToF;
+    
+    let unitF = document.querySelectorAll(".unit").innerHTML= "°F"
     let convertToF = document.querySelector("#conversion").innerHTML = "Convert to Celsius"
     isCel = false;
 
   }else{
     let toC = parseInt(document.querySelector("#temp").innerHTML)-32
     let tempC = document.querySelector("#temp").innerHTML = toC
-    let unitC = document.querySelector("#unit").innerHTML = "°C"
+    let feelsToC = parseInt(document.querySelector("#feelsLike").innerHTML)-32
+    let feelsC = document.querySelector("#feelsLike").innerHTML = feelsToC;
+    let unitC = document.querySelector(".unit").innerHTML = "°C"
     let convertToC = document.querySelector("#conversion").innerHTML = "Convert to Fahrenheit"
     isCel = true;
   }
@@ -157,17 +151,8 @@ function toFahrenheit(event){
 
 let convertTemp = document.querySelector("#conversion")
 convertTemp.addEventListener("click",toFahrenheit)
-*/
-/*In your project, when a user searches for a city (example: New York), it should display the name of the city on the result page and the current temperature of the city.
-
-Please note: there's no need to include a temperature conversion at the moment. This will be taught later on in the course.*/
 
 
-
-
-/*🙀 Bonus point:
-Add a Current Location button. When clicking on it, 
-it uses the Geolocation API to get your GPS coordinates and display and the city and current temperature using the OpenWeather API.*/
 
 
 
