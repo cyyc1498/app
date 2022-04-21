@@ -122,6 +122,7 @@ axios.get(apiUrl).then(getCityTemp)
 
 let cityForm = document.querySelector("#search-form")
 cityForm.addEventListener("submit",citySearch)
+cityForm.addEventListener("submit",toFahrenheit)
 
 
 function showPosition(position) {
@@ -171,6 +172,7 @@ function geoTemp(response){
 
 let currentLoc = document.querySelector("#current-location");
 currentLoc.addEventListener("click", getCurrentLoc);
+currentLoc.addEventListener("click",toFahrenheit)
 
 let isCel = true;
 
