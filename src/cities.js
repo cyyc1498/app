@@ -124,38 +124,6 @@ let cityForm = document.querySelector("#search-form")
 cityForm.addEventListener("submit",citySearch)
 
 
-let isCel = true;
-
-function toFahrenheit(event){
-  event.preventDefault();
-  if(isCel === true){
-    let toF = parseInt(document.querySelector("#temp").innerHTML)+32
-    let tempF = document.querySelector("#temp").innerHTML = toF
-    let feelsToF = parseInt(document.querySelector("#feelsLike").innerHTML)+32
-    let feelsF = document.querySelector("#feelsLike").innerHTML = feelsToF;
-    
-    let unitF = document.querySelectorAll(".unit").innerHTML= "°F"
-    let convertToF = document.querySelector("#conversion").innerHTML = "Convert to Celsius"
-    isCel = false;
-
-  }else{
-    let toC = parseInt(document.querySelector("#temp").innerHTML)-32
-    let tempC = document.querySelector("#temp").innerHTML = toC
-    let feelsToC = parseInt(document.querySelector("#feelsLike").innerHTML)-32
-    let feelsC = document.querySelector("#feelsLike").innerHTML = feelsToC;
-    let unitC = document.querySelector(".unit").innerHTML = "°C"
-    let convertToC = document.querySelector("#conversion").innerHTML = "Convert to Fahrenheit"
-    isCel = true;
-  }
-}
-
-let convertTemp = document.querySelector("#conversion")
-convertTemp.addEventListener("click",toFahrenheit)
-
-
-
-
-
 function showPosition(position) {
   
   console.log(position.coords);
@@ -203,3 +171,35 @@ function geoTemp(response){
 
 let currentLoc = document.querySelector("#current-location");
 currentLoc.addEventListener("click", getCurrentLoc);
+
+let isCel = true;
+
+function toFahrenheit(event){
+  event.preventDefault();
+  if(isCel === true){
+    let toF = Math.round((parseInt(document.querySelector("#temp").innerHTML)*9)/5+32)
+    let tempF = document.querySelector("#temp").innerHTML = toF
+    let feelsToF = parseInt(document.querySelector("#feelsLike").innerHTML)+32
+    let feelsF = document.querySelector("#feelsLike").innerHTML = feelsToF;
+    let unitF = document.querySelectorAll(".unit").forEach(
+      function(element){
+        element.innerHTML = "°F"
+      })
+    let convertToF = document.querySelector("#conversion").innerHTML = "Convert to Celsius"
+    isCel = false;
+
+  }else{
+    let toC = Math.round((parseInt(document.querySelector("#temp").innerHTML)-32)*5/9)
+    let tempC = document.querySelector("#temp").innerHTML = toC
+    let feelsToC = parseInt(document.querySelector("#feelsLike").innerHTML)-32
+    let feelsC = document.querySelector("#feelsLike").innerHTML = feelsToC;
+    let unitC = document.querySelectorAll(".unit").forEach(
+      function(element){
+        element.innerHTML = "°C"})
+    let convertToC = document.querySelector("#conversion").innerHTML = "Convert to Fahrenheit"
+    isCel = true;
+  }
+}
+
+let convertTemp = document.querySelector("#conversion")
+convertTemp.addEventListener("click",toFahrenheit)
