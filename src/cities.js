@@ -81,6 +81,32 @@ let apiUrl =  `https://api.openweathermap.org/data/2.5/weather?q=Toronto&appid=$
   }
   axios.get(apiUrl).then(changeDefaultTemp)
 
+function getForecast(){
+ 
+  let forecastHTML = `<div class="row days">`
+  let forecastDisplay = document.querySelector("#forecast")
+  let weekDay = ["Sun","Mon","Tues","Wed","Thu"/*,"Fri","Sat"*/];
+  weekDay.forEach(function(day){
+
+    forecastHTML = forecastHTML + 
+    ` 
+      <div class="col">
+          <div class="card">
+              <div class="card-body">
+                  <h5 class="card-title">${day}</h5>
+                  <p class="card-text"><img src="http://openweathermap.org/img/wn/10d@2x.png"></br></br>
+                  12</br>24</p>
+              </div>
+          </div>
+      </div>`
+      
+  })
+  forecastDisplay.innerHTML = forecastHTML + `</div>`;
+  console.log()
+}
+
+getForecast();
+
 
 
 function citySearch(event){
@@ -173,6 +199,7 @@ function geoTemp(response){
 let currentLoc = document.querySelector("#current-location");
 currentLoc.addEventListener("click", getCurrentLoc);
 currentLoc.addEventListener("click",toFahrenheit)
+
 
 let isCel = true;
 
