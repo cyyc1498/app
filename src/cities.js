@@ -78,24 +78,40 @@ let apiUrl =  `https://api.openweathermap.org/data/2.5/weather?q=Toronto&appid=$
     let defaultIcon = document.querySelector("#icon")
     defaultIcon.setAttribute("src",`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
 
+    getForecastCoords(response.data.coord)
+
+
   }
   axios.get(apiUrl).then(changeDefaultTemp)
 
-function getForecast(){
- 
-  let forecastHTML = `<div class="row days">`
-  let forecastDisplay = document.querySelector("#forecast")
-  let weekDay = ["Sun","Mon","Tues","Wed","Thu"/*,"Fri","Sat"*/];
-  weekDay.forEach(function(day){
+  function getForecastCoords(coordinates){
+    console.log(coordinates)
+    let apiForecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`
+    console.log(apiForecastUrl)
+    axios.get(apiForecastUrl).then(getForecast)
+  }
 
-    forecastHTML = forecastHTML + 
+
+
+function getForecast(response){
+  let forecastInfo = response.data.daily;
+  console.log(forecastInfo)
+  let forecastDisplay = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row days">`;
+  
+  //let weekDay = ["Sun","Mon","Tues","Wed","Thu","Fri","Sat"];
+  
+  
+  forecastInfo.forEach(function(forecastDay){
+
+    forecastHTML +=
     ` 
       <div class="col">
           <div class="card">
               <div class="card-body">
-                  <h5 class="card-title">${day}</h5>
-                  <p class="card-text"><img src="http://openweathermap.org/img/wn/10d@2x.png"></br></br>
-                  12</br>24</p>
+                  <h5 class="card-title">${forecastDay.dt}</h5>
+                  <p class="card-text"><img src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png"></br></br>
+                  ${forecastDay.temp.max}</br>${forecastDay.temp.min}</p>
               </div>
           </div>
       </div>`
@@ -104,8 +120,6 @@ function getForecast(){
   forecastDisplay.innerHTML = forecastHTML + `</div>`;
   console.log()
 }
-
-getForecast();
 
 
 
