@@ -148,4 +148,7 @@ button{
     cursor: pointer;
 }
 
-
+#by{
+    position: absolute;
+    left: 45%;
+}
