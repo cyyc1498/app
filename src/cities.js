@@ -108,7 +108,7 @@ function getForecast(response){
   let forecastHTML = `<div class="row days">`;
   
   forecastInfo.forEach(function(forecastDay,index){
-    if(index<5){
+    if(index>0 && index<6){
     forecastHTML +=
     ` 
       <div class="col">
