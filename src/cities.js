@@ -92,6 +92,14 @@ let apiUrl =  `https://api.openweathermap.org/data/2.5/weather?q=Toronto&appid=$
   }
 
 
+ function forecastDate(time){
+    let date = new Date(time*1000);
+    day = date.getDay()
+    let weekDay = ["Sun","Mon","Tues","Wed","Thu","Fri","Sat"];
+    return weekDay[day]
+  }
+
+
 
 function getForecast(response){
   let forecastInfo = response.data.daily;
@@ -99,23 +107,20 @@ function getForecast(response){
   let forecastDisplay = document.querySelector("#forecast");
   let forecastHTML = `<div class="row days">`;
   
-  //let weekDay = ["Sun","Mon","Tues","Wed","Thu","Fri","Sat"];
-  
-  
-  forecastInfo.forEach(function(forecastDay){
-
+  forecastInfo.forEach(function(forecastDay,index){
+    if(index<5){
     forecastHTML +=
     ` 
       <div class="col">
           <div class="card">
               <div class="card-body">
-                  <h5 class="card-title">${forecastDay.dt}</h5>
+                  <h5 class="card-title">${forecastDate(forecastDay.dt)}</h5>
                   <p class="card-text"><img src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png"></br></br>
-                  ${forecastDay.temp.max}</br>${forecastDay.temp.min}</p>
+                  <span class="forecastTempMax">${Math.round(forecastDay.temp.max)}</span><span class="unit">°C</span> | <span class="forecastTempMin">${Math.round(forecastDay.temp.min)}</span><span class="unit">°C</span></p>
               </div>
           </div>
       </div>`
-      
+    }
   })
   forecastDisplay.innerHTML = forecastHTML + `</div>`;
   console.log()
@@ -155,6 +160,8 @@ function getCityTemp(response){
   let getIcon = document.querySelector("#icon")
   getIcon.setAttribute("src",`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
 
+  getForecastCoords(response.data.coord)
+
 }
 
 axios.get(apiUrl).then(getCityTemp)
@@ -162,7 +169,7 @@ axios.get(apiUrl).then(getCityTemp)
 
 let cityForm = document.querySelector("#search-form")
 cityForm.addEventListener("submit",citySearch)
-cityForm.addEventListener("submit",toFahrenheit)
+
 
 
 function showPosition(position) {
@@ -208,11 +215,14 @@ function geoTemp(response){
 
   let setIcon = document.querySelector("#icon")
   setIcon.setAttribute("src",`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
+
+  getForecastCoords(response.data.coord)
+
 }
 
 let currentLoc = document.querySelector("#current-location");
 currentLoc.addEventListener("click", getCurrentLoc);
-currentLoc.addEventListener("click",toFahrenheit)
+
 
 
 let isCel = true;
@@ -220,10 +230,26 @@ let isCel = true;
 function toFahrenheit(event){
   event.preventDefault();
   if(isCel === true){
-    let toF = Math.round((parseInt(document.querySelector("#temp").innerHTML)*9)/5+32)
+    let toF = Math.round((parseInt(document.querySelector("#temp").innerHTML)*9)/5+32);
     let tempF = document.querySelector("#temp").innerHTML = toF
-    let feelsToF = parseInt(document.querySelector("#feelsLike").innerHTML)+32
+
+     let forecastMaxToF = document.querySelectorAll(".forecastTempMax").forEach(
+      function(forecast){
+        forecast.innerHTML=Math.round((parseInt(forecast.innerHTML)*9)/5+32);
+      }
+    );
+    let forecastMaxF = document.querySelectorAll(".forecastTempMax").innerHTML = forecastMaxToF
+    
+    let forecastMinToF = document.querySelectorAll(".forecastTempMin").forEach(
+      function(forecast){
+        forecast.innerHTML=Math.round((parseInt(forecast.innerHTML)*9)/5+32);
+      }
+    );
+    let forecastMinF= document.querySelectorAll(".forecastTempMin").innerHTML = forecastMinToF
+
+    let feelsToF = Math.round((parseInt(document.querySelector("#feelsLike").innerHTML)*9)/5+32)
     let feelsF = document.querySelector("#feelsLike").innerHTML = feelsToF;
+    
     let unitF = document.querySelectorAll(".unit").forEach(
       function(element){
         element.innerHTML = "°F"
@@ -234,11 +260,28 @@ function toFahrenheit(event){
   }else{
     let toC = Math.round((parseInt(document.querySelector("#temp").innerHTML)-32)*5/9)
     let tempC = document.querySelector("#temp").innerHTML = toC
-    let feelsToC = parseInt(document.querySelector("#feelsLike").innerHTML)-32
+    
+    let forecastMaxToC = document.querySelectorAll(".forecastTempMax").forEach(
+      function(forecast){
+        forecast.innerHTML=Math.round((parseInt(forecast.innerHTML)-32)*5/9)
+      }
+    );
+    let forecastMaxC = document.querySelectorAll(".forecastTempMax").innerHTML = forecastMaxToC
+
+    let forecastMinToC = document.querySelectorAll(".forecastTempMin").forEach(
+      function(forecast){
+        forecast.innerHTML=Math.round((parseInt(forecast.innerHTML)-32)*5/9)
+      }
+    );
+    let forecastMinC = document.querySelectorAll(".forecastTempMin").innerHTML = forecastMinToC
+    
+    let feelsToC = Math.round((parseInt(document.querySelector("#feelsLike").innerHTML)-32)*5/9)
     let feelsC = document.querySelector("#feelsLike").innerHTML = feelsToC;
+    
     let unitC = document.querySelectorAll(".unit").forEach(
       function(element){
-        element.innerHTML = "°C"})
+        element.innerHTML = "°C"
+      })
     let convertToC = document.querySelector("#conversion").innerHTML = "Convert to Fahrenheit"
     isCel = true;
   }
