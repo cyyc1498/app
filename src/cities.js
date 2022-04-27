@@ -51,6 +51,9 @@ let apiUrl =  `https://api.openweathermap.org/data/2.5/weather?q=Toronto&appid=$
   function getForecastCoords(coordinates){
     console.log(coordinates)
     let apiForecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`
+      if(isCel === false){
+        apiForecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`
+      }
     console.log(apiForecastUrl)
     axios.get(apiForecastUrl).then(getForecast)
   }
@@ -102,6 +105,10 @@ function citySearch(event){
 
 let apiKey = `273346a7322f8fd8336a2edf5af47985`;
 let apiUrl =  `https://api.openweathermap.org/data/2.5/weather?q=${newCity}&appid=${apiKey}&units=metric`;
+
+if(isCel === false){
+  apiUrl =`https://api.openweathermap.org/data/2.5/weather?q=${newCity}&appid=${apiKey}&units=imperial`
+}
 
 function getCityTemp(response){
   console.log(response.data)
@@ -253,5 +260,4 @@ function toFahrenheit(event){
 
 let convertTemp = document.querySelector("#conversion")
 convertTemp.addEventListener("click",toFahrenheit)
-
 
